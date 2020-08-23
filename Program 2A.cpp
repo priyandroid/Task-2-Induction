@@ -32,7 +32,7 @@ int main()
        
          if(c1 ==c2)
         {
-            ans=max(ans,2*c1);
+            ans+=2*c1;
             c1=0;
             c2=0;
         }
