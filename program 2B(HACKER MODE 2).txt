@@ -22,32 +22,47 @@ ll right[q+1];
 ll ans[q +1];
 memset(ans,0,sizeof ans);
 
-db arr[q];
+db arr[q];          //storing query here so when we sort array by increasing value of right we have corresponding 'left' and 'value' with us
 for(i=0;i<q;i++){
    
     cin>>arr[i].left>>arr[i].right>>arr[i].val;
-    right[i]=arr[i].right;
+    right[i]=arr[i].right;         //the max element always occurs at one of the right indexes of query or it would be the last index of array
 }
-sort(right, right+q);
+
+//if the array is {1,2,3,4,5} and query (1 4), (2 2), (3 5) sorting the array by right index: the right[] ={2,4,5} 
+ 
+
+
+sort(right, right+q);              
 sort(arr,arr+q,comp);
 
 for(i=0;i<q;i++)
 {
  ll temp =arr[i].left;   
-  auto index=  lower_bound(right,right+q,temp);
-  ans[index-right]+=arr[i].val;
-  ans[i+1]-=arr[i].val;
-    
-}
+  auto index=  lower_bound(right,right+q,temp);   //now we check for each of the right index the no of times it occured in any of the query
+ ans[index-right]+=arr[i].val;                             //    i=  0   1   2    3
+  ans[i+1]-=arr[i].val;                                  //  right=  2   4   5
+ }                                                       //  left=   2   1   3
+                                                          //  val=   20   10  25 
+                                                         //    ans=  +20  -20 
+                                                       //            +10      -10
+                                                       //                 +25       -25
+                                                               -------------------------
+       for(i=1;i<q;i++)                           //prefix sum        30  35  25    0
+       ans[i]+=ans[i-1];                                     
+                          
+        for(i=0;i<q;i++)                         //adding right[i]   32  39  30
+      ans[i]+=right[i];
+      sort(ans,ans +q);   
+     cout<<ans[q-1];                        //max element=39 
+          return 0;
+}                              
+ 
 
- for(i=1;i<q;i++)
-     ans[i]+=ans[i-1];
+        
+     
    
- for(i=0;i<q;i++)
- ans[i]+=right[i];
- sort(ans,ans +q);
- cout<<ans[q-1];
+ 
 
 
-    return 0;
-}
+
