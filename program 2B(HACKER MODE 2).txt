@@ -1,0 +1,53 @@
+//TASK 2B HACKER MODE 2
+
+#include <bits/stdc++.h>
+
+using namespace std;
+# define ll long long int
+struct db{
+    ll left;
+    ll right;
+    ll val;
+};
+
+bool comp(db one, db two){
+    return (one.right<two.right);
+}
+
+int main()
+{ ll n,q,i;
+
+cin>>n>>q;
+ll right[q+1];
+ll ans[q +1];
+memset(ans,0,sizeof ans);
+
+db arr[q];
+for(i=0;i<q;i++){
+   
+    cin>>arr[i].left>>arr[i].right>>arr[i].val;
+    right[i]=arr[i].right;
+}
+sort(right, right+q);
+sort(arr,arr+q,comp);
+
+for(i=0;i<q;i++)
+{
+ ll temp =arr[i].left;   
+  auto index=  lower_bound(right,right+q,temp);
+  ans[index-right]+=arr[i].val;
+  ans[i+1]-=arr[i].val;
+    
+}
+
+ for(i=1;i<q;i++)
+     ans[i]+=ans[i-1];
+   
+ for(i=0;i<q;i++)
+ ans[i]+=right[i];
+ sort(ans,ans +q);
+ cout<<ans[q-1];
+
+
+    return 0;
+}
