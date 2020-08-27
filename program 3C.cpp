@@ -1,16 +1,10 @@
-/******************************************************************************
-
-                              Online C++ Compiler.
-               Code, Compile, Run and Debug C++ program online.
-Write your code in this editor and press "Run" button to compile and execute it.
-
-*******************************************************************************/
+//TASK 3 PROGRAM 3
 
 #include <bits/stdc++.h>
 
 using namespace std;
 # define ll long long int
-ll findTotalprime(ll n){
+ll findTotalprime(ll n){      
    bool mp[n+1]; 
     unordered_map<ll,ll> prefix;
     memset(mp,true,sizeof mp);
@@ -34,8 +28,11 @@ int main()
 {  ll n;
 cin>>n;
 
-   ll count=findTotalprime(n);
-   cout<<(count*(count+1))/2;
+   ll count=findTotalprime(n);            //function to calculate total no of prime no in a given range
+   cout<<(count*(count+1))/2;            //for a given range 'n' in order to minimise the sum of distinct Ci we will initialise every i i.e. prime 
+                                         //and its multiple with same value ,this keeps care of the condition that for(i,j) if  co-prime then
+                                          //Ci !=Cj
+   //So basically need just calculate no of prime in a given range(let it be k) and find sum of first k natural no(to keep the sum min)  !!
 
     return 0;
 }
