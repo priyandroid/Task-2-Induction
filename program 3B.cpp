@@ -20,7 +20,8 @@ int main(){
         vec.push_back(num);
     }
     sort(vec.begin(),vec.end(),comp);
-   while(vec.size()!=n){
+   while(vec.size()!=n){           //always trying replace two min elements by their sum so that strength can be maximized,it will either be 
+                                     //their sum or the element next to the two min elements 
        ll x= vec.back();
        vec.pop_back();
        ll y= vec.back();
